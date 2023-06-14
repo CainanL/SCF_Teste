@@ -1,10 +1,11 @@
 import { Database } from "../../../Database/Database";
 import { Register } from "../../../Database/Entity/Register";
-import { ICreateRegisterDTO, IUpdateRegisterDTO, TRepository } from "../dto";
+import { View } from "../../../Database/Entity/View";
+import { ICreateRegisterDTO, IUpdateRegisterDTO, TRepository, TView } from "../dto";
 import { IRegisterRepository } from "./IRepository";
 
 export class RegisterRepository implements IRegisterRepository {
-
+    
     async create(data: ICreateRegisterDTO): Promise<TRepository> {
         const newRegister = new Register(data);
         console.log(newRegister)
@@ -28,6 +29,14 @@ export class RegisterRepository implements IRegisterRepository {
                 register.job.toLocaleLowerCase() == filter.toLocaleLowerCase()
                 || register.name.toLocaleLowerCase() == filter.toLocaleLowerCase()
         );
+    }
+
+    async addView(id: number): Promise<void> {
+        Database.views.push(new View(id));
+    }
+
+    async getViewsByUserId(id: number): Promise<TView[]> {
+        return Database.views.filter(view => view.userId == id);
     }
 
     async findById(id: number): Promise<TRepository> {

@@ -6,9 +6,8 @@ export class CreateRegistersController {
     async handle(request: Request, response: Response): Promise<Response> {
         const { name, job } = request.body;
         const createRegistersUseCase = new CreateRegistersUseCase(new RegisterRepository());
-        
-        const data = { register: await createRegistersUseCase.execute({ name, job }) }
 
+        const data = { register: await createRegistersUseCase.execute({ name, job }) }
         return response.json(data);
     }
 }

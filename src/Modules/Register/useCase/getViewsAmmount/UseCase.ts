@@ -1,14 +1,15 @@
 import { IRegisterRepository } from "../../Repository/IRepository";
-import { ICreateRegisterDTO, TRepository } from "../../dto";
 
-export class CreateRegistersUseCase {
+export class GetViewsAmmountUseCase {
     private registersRepository: IRegisterRepository;
 
     constructor(registersRepository: IRegisterRepository) {
         this.registersRepository = registersRepository;
     }
 
-    async execute(data: ICreateRegisterDTO): Promise<TRepository> {
-        return await this.registersRepository.create(data);
+    async execute(id: number): Promise<number> {
+        return (await this.registersRepository
+            .getViewsByUserId(id))
+            .length;
     }
 }

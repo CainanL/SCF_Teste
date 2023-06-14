@@ -9,6 +9,8 @@ export class FindOneRegistersUseCase{
     }    
 
     async execute(filter: string): Promise<TRepository>{
-        return await this.registersRepository.findOne(filter);
+        const register = await this.registersRepository.findOne(filter);
+        await this.registersRepository.addView(register.id);
+        return register;
     }
 }

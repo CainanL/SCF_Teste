@@ -4,6 +4,15 @@ export type TRepository = {
     job: string;
 }
 
+export type TView = {
+    id: number;
+    userId: number;
+}
+
+export type TRequestUserData = {
+    requestUserData: { role: Array<'delete' | 'update'> }
+}
+
 export interface ICreateRegisterDTO {
     name: string;
     job: string;
