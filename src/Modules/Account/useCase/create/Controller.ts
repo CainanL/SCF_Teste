@@ -6,7 +6,7 @@ export class CreateAccountController {
     async handle(request: Request, response: Response): Promise<Response> {
         const {
             email,
-            passowrd,
+            password,
             role,
             userId
         } = request.body;
@@ -15,7 +15,7 @@ export class CreateAccountController {
         
         await createAccountUseCase.execute({
             email,
-            passowrd,
+            password,
             role,
             userId
         });

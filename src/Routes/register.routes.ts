@@ -7,6 +7,7 @@ import { UpdateRegistersController } from "../Modules/Register/useCase/update/Co
 import { GetViewsAmmountController } from "../Modules/Register/useCase/getViewsAmmount/Controller";
 import { accountValidator } from "../shared/middleware/accountValidator";
 import { PermissionRegisterValidator } from "../Modules/Register/middleware/permission";
+import { RegisterRequestSchema } from "../Modules/Register/middleware/requestSchema";
 
 const searchRegistersController = new SearchRegistersController();
 const findOneRegistersController = new FindOneRegistersController();
@@ -19,22 +20,51 @@ const permissionDeleteRegisterValidator = new PermissionRegisterValidator('delet
 
 const registerRouter = Router();
 
-registerRouter.get("/", searchRegistersController.handle);
-registerRouter.get("/findOne", findOneRegistersController.handle);
-registerRouter.post("/", createRegistersController.handle);
+registerRouter.get(
+    "/",
+    RegisterRequestSchema.search,
+    RegisterRequestSchema.validateRequestSchema,
+    searchRegistersController.handle
+);
+
+registerRouter.get(
+    "/findOne",
+    RegisterRequestSchema.findOne,
+    RegisterRequestSchema.validateRequestSchema,
+    findOneRegistersController.handle
+);
+
+registerRouter.post(
+    "/",
+    createRegistersController.handle
+);
+
 registerRouter.put(
     "/:id",
+    RegisterRequestSchema.update,
+    RegisterRequestSchema.validateRequestSchema,
     accountValidator,
-    permissionUpdateRegisterValidator.hasPermission.bind(permissionUpdateRegisterValidator),
+    permissionUpdateRegisterValidator
+        .hasPermission.bind(permissionUpdateRegisterValidator),
     updateRegistersController.handle
 );
+
 registerRouter.delete(
     "/:id",
+    RegisterRequestSchema.requestId,
+    RegisterRequestSchema.validateRequestSchema,
     accountValidator,
-    permissionDeleteRegisterValidator.hasPermission.bind(permissionDeleteRegisterValidator),
+    permissionDeleteRegisterValidator
+        .hasPermission.bind(permissionDeleteRegisterValidator),
     deleteRegistersController.handle
 );
-registerRouter.get("/viewsAmmount/:id", getViewsAmmountController.handle);
+
+registerRouter.get(
+    "/viewsAmmount/:id",
+    RegisterRequestSchema.requestId,
+    RegisterRequestSchema.validateRequestSchema,
+    getViewsAmmountController.handle
+);
 
 
 

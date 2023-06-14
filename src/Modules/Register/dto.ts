@@ -1,3 +1,5 @@
+import { ERole } from "../Account/enum";
+
 export type TRepository = {
     id: number;
     name: string;
@@ -10,7 +12,7 @@ export type TView = {
 }
 
 export type TRequestUserData = {
-    requestUserData: { role: Array<'delete' | 'update'> }
+    requestUserData: { role: Array<ERole.deleteRegister| ERole.updateRegister> }
 }
 
 export interface ICreateRegisterDTO {

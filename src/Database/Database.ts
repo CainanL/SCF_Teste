@@ -1,4 +1,5 @@
 import { TAccount } from "../Modules/Account/dto";
+import { ERole } from "../Modules/Account/enum";
 import { TRepository, TView } from "../Modules/Register/dto";
 
 export class Database {
@@ -22,7 +23,7 @@ export class Database {
             email: "joao@scf.com",
             id: 1,
             passwordEncripted: '$2a$10$OuIy3mu85po0XZ5jRWpRjes1BBptbwpR8YrrZh8cwFEVs05QkdaoG', //password: 123
-            role: ['delete', "update"],
+            role: [ERole.deleteRegister, ERole.updateRegister],
             userId: 1
         },
         {

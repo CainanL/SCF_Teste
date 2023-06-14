@@ -1,3 +1,5 @@
+import { ERole } from "../Modules/Account/enum";
+
 export type TTokenVerify = {
     id: number;
     email: string;
@@ -5,4 +7,4 @@ export type TTokenVerify = {
     role: TRole;
 }
 
-export type TRole = Array<'update'|'delete'>
+export type TRole = Array<ERole.deleteRegister | ERole.updateRegister>

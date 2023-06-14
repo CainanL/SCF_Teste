@@ -8,7 +8,6 @@ export class FindOneRegistersController {
         const findOneRegistersUseCase = new FindOneRegistersUseCase(new RegisterRepository());
 
         const data = { register: await findOneRegistersUseCase.execute(filter) }
-
         return response.json(data);
     }
 }

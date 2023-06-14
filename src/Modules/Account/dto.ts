@@ -12,7 +12,7 @@ export type TAccount = {
 export interface ICreateAccountDTO {
     userId: number;
     email: string;
-    passowrd: string;
+    password: string;
     role: TRole
 }
 
