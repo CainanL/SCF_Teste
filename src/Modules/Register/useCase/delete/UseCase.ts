@@ -7,7 +7,7 @@ export class DeleteRegistersUseCase{
         this.registersRepository = registersRepository;
     }    
 
-    async execute(id: number): Promise<void>{
-        await this.registersRepository.delete(id);
+     execute(id: number): Promise<void>{
+         this.registersRepository.delete(id);
     }
 }

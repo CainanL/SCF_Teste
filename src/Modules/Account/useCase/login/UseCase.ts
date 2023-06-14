@@ -16,14 +16,14 @@ export class LoginAccountUseCase {
         this.registerRepository = registerRepository;
     }
 
-    async execute({ email, password }: ILoginAccountDTO): Promise<string> {
-        const account = await this.accountRepository.getByEmail(email);
+     execute({ email, password }: ILoginAccountDTO): Promise<string> {
+        const account =  this.accountRepository.getByEmail(email);
 
         if (!account) return;
         const passwordMatch = compareSync(password, account.passwordEncripted);
         if (!passwordMatch) return;
         
-        const register = await this.registerRepository.findById(account.userId);
+        const register =  this.registerRepository.findById(account.userId);
         
         console.log(process.env.TOKEN_SECRET_KEY, process.env.EXPIRES_IN_TOKEN)
         const token = jwt.sign(

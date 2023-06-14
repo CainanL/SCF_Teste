@@ -8,7 +8,7 @@ export class UpdateRegistersUseCase{
         this.registersRepository = registersRepository;
     }    
 
-    async execute(id: number, data: IUpdateRegisterDTO): Promise<TRepository>{
-        return await this.registersRepository.update(id, data);
+     execute(id: number, data: IUpdateRegisterDTO): Promise<TRepository>{
+        return  this.registersRepository.update(id, data);
     }
 }

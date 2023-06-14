@@ -6,14 +6,14 @@ import { IRegisterRepository } from "./IRepository";
 
 export class RegisterRepository implements IRegisterRepository {
     
-    async create(data: ICreateRegisterDTO): Promise<TRepository> {
+     create(data: ICreateRegisterDTO): Promise<TRepository> {
         const newRegister = new Register(data);
         console.log(newRegister)
         Database.registers.push(newRegister);
         return newRegister;
     }
 
-    async search(filter: string): Promise<TRepository[]> {
+     search(filter: string): Promise<TRepository[]> {
         if (!filter || filter == '') return Database.registers;
 
         return Database.registers.filter(
@@ -23,7 +23,7 @@ export class RegisterRepository implements IRegisterRepository {
         );
     }
 
-    async findOne(filter: string): Promise<TRepository> {
+     findOne(filter: string): Promise<TRepository> {
         return Database.registers.find(
             register =>
                 register.job.toLocaleLowerCase() == filter.toLocaleLowerCase()
@@ -31,22 +31,22 @@ export class RegisterRepository implements IRegisterRepository {
         );
     }
 
-    async addView(id: number): Promise<void> {
+     addView(id: number): Promise<void> {
         Database.views.push(new View(id));
     }
 
-    async getViewsByUserId(id: number): Promise<TView[]> {
+     getViewsByUserId(id: number): Promise<TView[]> {
         return Database.views.filter(view => view.userId == id);
     }
 
-    async findById(id: number): Promise<TRepository> {
+     findById(id: number): Promise<TRepository> {
         return Database.registers.find(
             register =>
                 register.id == id
         );
     }
 
-    async update(id: number, { job, name }: IUpdateRegisterDTO): Promise<TRepository> {
+     update(id: number, { job, name }: IUpdateRegisterDTO): Promise<TRepository> {
 
         const index = Database.registers.findIndex(register => register.id == id)
 
@@ -58,7 +58,7 @@ export class RegisterRepository implements IRegisterRepository {
         return Database.registers[index];
     }
 
-    async delete(id: number): Promise<void> {
+     delete(id: number): Promise<void> {
         Database.registers = Database.registers.filter(register => register.id !== id);
     }
 }

@@ -8,10 +8,10 @@ export class FindOneRegistersUseCase {
         this.registersRepository = registersRepository;
     }
 
-    async execute(filter: string): Promise<TRepository> {
-        const register = await this.registersRepository.findOne(filter);
+     execute(filter: string): Promise<TRepository> {
+        const register =  this.registersRepository.findOne(filter);
         if (!register) return;
-        await this.registersRepository.addView(register.id);
+         this.registersRepository.addView(register.id);
         return register;
     }
 }

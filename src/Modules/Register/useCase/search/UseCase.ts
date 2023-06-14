@@ -8,7 +8,7 @@ export class SearchRegistersUseCase {
         this.registersRepository = registersRepository;
     }    
 
-    async execute(filter: string): Promise<TRepository[]>{
-        return await this.registersRepository.search(filter);
+     execute(filter: string): Promise<TRepository[]>{
+        return  this.registersRepository.search(filter);
     }
 }

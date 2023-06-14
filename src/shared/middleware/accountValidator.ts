@@ -3,7 +3,7 @@ import jwt from "jsonwebtoken";
 import { TTokenVerify } from "../dto";
 import { AccountRepository } from "../../Modules/Account/Repository/Implementation";
 
-export async function accountValidator (request: Request, response: Response, next: NextFunction) {
+export  function accountValidator (request: Request, response: Response, next: NextFunction) {
     const authorization = request.headers.authorization;
 
     if (!authorization) return response.status(401).json({ error: "access denied" });
@@ -19,7 +19,7 @@ export async function accountValidator (request: Request, response: Response, ne
         } = jwt.verify(token, process.env.TOKEN_SECRET_KEY) as TTokenVerify;
         
         const accountRepository = new AccountRepository();
-        const accountValid = await accountRepository.getById(id);
+        const accountValid =  accountRepository.getById(id);
         
         if (!accountValid) return response.status(401).json({ error: 'access denied' });
 

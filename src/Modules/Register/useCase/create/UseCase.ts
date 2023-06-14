@@ -8,7 +8,7 @@ export class CreateRegistersUseCase {
         this.registersRepository = registersRepository;
     }
 
-    async execute(data: ICreateRegisterDTO): Promise<TRepository> {
-        return await this.registersRepository.create(data);
+     execute(data: ICreateRegisterDTO): Promise<TRepository> {
+        return  this.registersRepository.create(data);
     }
 }

@@ -9,7 +9,7 @@ export class PermissionRegisterValidator {
         this.declarateRole = declarateRole;
     }
 
-    async hasPermission(request: Request, response: Response, next: NextFunction) {
+     hasPermission(request: Request, response: Response, next: NextFunction) {
         try {
             const { requestUserData } = request.body as TRequestUserData;
             const accountHasPermission = requestUserData.role.some((role: string) => role === this.declarateRole);

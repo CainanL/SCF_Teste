@@ -4,7 +4,7 @@ import { LoginAccountUseCase } from "./UseCase";
 import { RegisterRepository } from "../../../Register/Repository/Implementation";
 
 export class LoginAccountController {
-    async handle(request: Request, response: Response): Promise<Response> {
+     handle(request: Request, response: Response): Promise<Response> {
         const {
             email,
             password
@@ -15,7 +15,7 @@ export class LoginAccountController {
             new RegisterRepository()
         );
         
-        const token = await loginAccountUseCase.execute({
+        const token =  loginAccountUseCase.execute({
             email,
             password
         });

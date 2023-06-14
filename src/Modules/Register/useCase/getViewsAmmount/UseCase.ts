@@ -7,8 +7,8 @@ export class GetViewsAmmountUseCase {
         this.registersRepository = registersRepository;
     }
 
-    async execute(id: number): Promise<number> {
-        return (await this.registersRepository
+     execute(id: number): Promise<number> {
+        return ( this.registersRepository
             .getViewsByUserId(id))
             .length;
     }
