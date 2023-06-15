@@ -1,7 +1,7 @@
 import {
     body
 } from 'express-validator';
-import { RequestSchema } from '../../../shared/service/RequestSchema';
+import { RequestSchema } from '../../../shared/middleware/RequestSchema';
 export class AccountRequestSchema extends RequestSchema {
     static login = [
         body('email').isEmail().notEmpty(),

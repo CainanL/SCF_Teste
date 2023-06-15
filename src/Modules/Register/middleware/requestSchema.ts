@@ -3,7 +3,7 @@ import {
     param,
     query
 } from 'express-validator';
-import { RequestSchema } from '../../../shared/service/RequestSchema';
+import { RequestSchema } from '../../../shared/middleware/RequestSchema';
 export class RegisterRequestSchema extends RequestSchema {
     static search = [query('filter').optional()]
     static findOne = [query('filter').isString().notEmpty()]
