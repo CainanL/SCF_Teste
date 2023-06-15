@@ -8,7 +8,7 @@ export class FindOneRegistersUseCase {
         this.registersRepository = registersRepository;
     }
 
-     execute(filter: string): Promise<TRepository> {
+     execute(filter: string): TRepository {
         const register =  this.registersRepository.findOne(filter);
         if (!register) return;
          this.registersRepository.addView(register.id);

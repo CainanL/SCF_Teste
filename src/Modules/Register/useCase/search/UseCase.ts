@@ -8,7 +8,7 @@ export class SearchRegistersUseCase {
         this.registersRepository = registersRepository;
     }    
 
-     execute(filter: string): Promise<TRepository[]>{
+     execute(filter: string): TRepository[]{
         return  this.registersRepository.search(filter);
     }
 }

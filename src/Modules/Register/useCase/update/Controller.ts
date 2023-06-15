@@ -3,7 +3,7 @@ import { RegisterRepository } from "../../Repository/Implementation";
 import { UpdateRegistersUseCase } from "./UseCase";
 
 export class UpdateRegistersController {
-     handle(request: Request, response: Response): Promise<Response> {
+     handle(request: Request, response: Response): Response {
         const { name, job } = request.body;
         const { id } = request.params;
         const updateRegistersUseCase = new UpdateRegistersUseCase(new RegisterRepository());

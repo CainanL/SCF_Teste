@@ -3,7 +3,7 @@ import { SearchRegistersUseCase } from "./UseCase";
 import { RegisterRepository } from "../../Repository/Implementation";
 
 export class SearchRegistersController {
-     handle(request: Request, response: Response): Promise<Response> {
+     handle(request: Request, response: Response): Response {
         const { filter } = request.query as { filter: string };
         console.log(filter)
         const searchRegistersUseCase = new SearchRegistersUseCase(new RegisterRepository());

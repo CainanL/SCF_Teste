@@ -3,7 +3,7 @@ import { AccountRepository } from "../../Repository/Implementation";
 import { CreateAccountUseCase } from "./UseCase";
 
 export class CreateAccountController {
-     handle(request: Request, response: Response): Promise<Response> {
+     handle(request: Request, response: Response): Response {
         const {
             email,
             password,

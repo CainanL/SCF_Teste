@@ -3,7 +3,7 @@ import { GetViewsAmmountUseCase } from "./UseCase";
 import { RegisterRepository } from "../../Repository/Implementation";
 
 export class GetViewsAmmountController {
-     handle(request: Request, response: Response): Promise<Response> {
+     handle(request: Request, response: Response): Response {
         const { id } = request.params;
         const getViewsAmmountUseCase = new GetViewsAmmountUseCase(new RegisterRepository());
         

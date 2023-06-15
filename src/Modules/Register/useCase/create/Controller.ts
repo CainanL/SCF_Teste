@@ -3,7 +3,7 @@ import { RegisterRepository } from "../../Repository/Implementation";
 import { CreateRegistersUseCase } from "./UseCase";
 
 export class CreateRegistersController {
-     handle(request: Request, response: Response): Promise<Response> {
+     handle(request: Request, response: Response): Response {
         const { name, job } = request.body;
         const createRegistersUseCase = new CreateRegistersUseCase(new RegisterRepository());
 

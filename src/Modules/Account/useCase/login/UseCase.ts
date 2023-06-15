@@ -16,7 +16,7 @@ export class LoginAccountUseCase {
         this.registerRepository = registerRepository;
     }
 
-     execute({ email, password }: ILoginAccountDTO): Promise<string> {
+     execute({ email, password }: ILoginAccountDTO): string {
         const account =  this.accountRepository.getByEmail(email);
 
         if (!account) return;
@@ -24,7 +24,6 @@ export class LoginAccountUseCase {
         if (!passwordMatch) return;
         
         const register =  this.registerRepository.findById(account.userId);
-        
         console.log(process.env.TOKEN_SECRET_KEY, process.env.EXPIRES_IN_TOKEN)
         const token = jwt.sign(
             {

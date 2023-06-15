@@ -3,7 +3,7 @@ import { FindOneRegistersUseCase } from "./UseCase";
 import { RegisterRepository } from "../../Repository/Implementation";
 
 export class FindOneRegistersController {
-     handle(request: Request, response: Response): Promise<Response> {
+     handle(request: Request, response: Response): Response {
         const { filter } = request.query as { filter: string };
         const findOneRegistersUseCase = new FindOneRegistersUseCase(new RegisterRepository());
 

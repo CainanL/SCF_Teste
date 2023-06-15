@@ -1,7 +1,7 @@
 import { ICreateAccountDTO, TAccount } from "../dto";
 
 export interface IAccountRepository {
-    create(data: ICreateAccountDTO): Promise<void>;
-    getByEmail(email: string): Promise<TAccount>;
-    getById(id: number): Promise<TAccount>;
+    create(data: ICreateAccountDTO): void;
+    getByEmail(email: string): TAccount;
+    getById(id: number): TAccount;
 }

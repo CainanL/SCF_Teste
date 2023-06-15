@@ -11,7 +11,7 @@ export class CreateAccountUseCase {
         this.accountRepository = accountRepository;
     }
 
-     execute({ email, password, role, userId }: ICreateAccountDTO): Promise<void> {
+     execute({ email, password, role, userId }: ICreateAccountDTO): void {
         const emailAlreadExists = !!this.accountRepository.getByEmail(email);
         if (emailAlreadExists) return;
         const userAlreadHasAccount = !!this.accountRepository.getById(userId);

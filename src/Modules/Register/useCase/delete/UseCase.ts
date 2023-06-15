@@ -7,7 +7,7 @@ export class DeleteRegistersUseCase{
         this.registersRepository = registersRepository;
     }    
 
-     execute(id: number): Promise<void>{
+     execute(id: number): void{
          this.registersRepository.delete(id);
     }
 }

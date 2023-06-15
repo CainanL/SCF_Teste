@@ -8,7 +8,7 @@ export class UpdateRegistersUseCase{
         this.registersRepository = registersRepository;
     }    
 
-     execute(id: number, data: IUpdateRegisterDTO): Promise<TRepository>{
+     execute(id: number, data: IUpdateRegisterDTO): TRepository{
         return  this.registersRepository.update(id, data);
     }
 }

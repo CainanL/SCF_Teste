@@ -7,7 +7,7 @@ export class GetViewsAmmountUseCase {
         this.registersRepository = registersRepository;
     }
 
-     execute(id: number): Promise<number> {
+     execute(id: number): number {
         return ( this.registersRepository
             .getViewsByUserId(id))
             .length;

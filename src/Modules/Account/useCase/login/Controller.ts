@@ -4,7 +4,7 @@ import { LoginAccountUseCase } from "./UseCase";
 import { RegisterRepository } from "../../../Register/Repository/Implementation";
 
 export class LoginAccountController {
-     handle(request: Request, response: Response): Promise<Response> {
+     handle(request: Request, response: Response): Response {
         const {
             email,
             password
