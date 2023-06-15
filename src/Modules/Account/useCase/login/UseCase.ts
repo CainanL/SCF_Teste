@@ -16,30 +16,34 @@ export class LoginAccountUseCase {
         this.registerRepository = registerRepository;
     }
 
-     execute({ email, password }: ILoginAccountDTO): string {
-        const account =  this.accountRepository.getByEmail(email);
+    execute({ email, password }: ILoginAccountDTO): string {
+        try {
+            const account = this.accountRepository.getByEmail(email);
+            if (!account) return;
+            const passwordMatch = compareSync(password, account.passwordEncripted);
+            if (!passwordMatch) return;
 
-        if (!account) return;
-        const passwordMatch = compareSync(password, account.passwordEncripted);
-        if (!passwordMatch) return;
-        
-        const register =  this.registerRepository.findById(account.userId);
-        console.log(process.env.TOKEN_SECRET_KEY, process.env.EXPIRES_IN_TOKEN)
-        const token = jwt.sign(
-            {
-                email,
-                role: account.role,
-                id: account.id,
-                userId: account.userId,
-                name: register.name
-            },
-            process.env.TOKEN_SECRET_KEY,
-            {
-                expiresIn: process.env.EXPIRES_IN_TOKEN
-            }
+            const register = this.registerRepository.findById(account.userId);
+            console.log(process.env.TOKEN_SECRET_KEY, process.env.EXPIRES_IN_TOKEN)
+            const token = jwt.sign(
+                {
+                    email,
+                    role: account.role,
+                    id: account.id,
+                    userId: account.userId,
+                    name: register.name
+                },
+                process.env.TOKEN_SECRET_KEY,
+                {
+                    expiresIn: process.env.EXPIRES_IN_TOKEN
+                }
             );
 
-        return token;
+            return token;
+
+        } catch (error) {
+            throw error;
+        }
     }
 
 

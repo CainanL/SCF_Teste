@@ -1,4 +1,4 @@
-import express, { NextFunction, Request, Response } from 'express';
+import express from 'express';
 import { routes } from './Routes';
 import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
@@ -17,7 +17,8 @@ app.use(routes);
 
 app.use(AppError.errorResponse)
 
-const port = 3000;
-app.listen(port, function () {
-  console.log(`Cainan Luyles's test server is running on port: ${port}`);
-});
+const port = Number(process.env.PORT);
+app.listen(
+  port,
+  () => console.log(`Cainan Luyles's test server is running on port: ${port}`)
+);

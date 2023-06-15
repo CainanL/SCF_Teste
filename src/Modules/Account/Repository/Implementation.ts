@@ -5,14 +5,26 @@ import { IAccountRepository } from "./IRepository";
 
 export class AccountRepository implements IAccountRepository {
     create(data: ICreateAccountDTO): void {
-        Database.account.push(new Account(data));
-    };
+        try {
+            Database.account.push(new Account(data));
+        } catch (error) {
+            throw error;
+        }
+    }
 
     getByEmail(email: string): TAccount {
-        return Database.account.find(acc => acc.email == email);
+        try {
+            return Database.account.find(acc => acc.email == email);
+        } catch (error) {
+            throw error;
+        }
     }
 
     getById(id: number): TAccount {
-        return Database.account.find(acc => acc.id == id);
+        try {
+            return Database.account.find(acc => acc.id == id);
+        } catch (error) {
+            throw error;
+        }
     }
 }

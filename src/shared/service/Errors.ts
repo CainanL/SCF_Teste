@@ -15,7 +15,7 @@ export class AppError {
         response: Response,
         next: NextFunction
     ) {
-        if (err instanceof this) {
+        if (err instanceof AppError) {
             return response.status(err.statusCode).json({ error: err.message });
         }
         return response.status(500).json({ error: 'Internal server error!!!' });

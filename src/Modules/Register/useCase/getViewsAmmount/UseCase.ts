@@ -7,9 +7,14 @@ export class GetViewsAmmountUseCase {
         this.registersRepository = registersRepository;
     }
 
-     execute(id: number): number {
-        return ( this.registersRepository
-            .getViewsByUserId(id))
-            .length;
+    execute(id: number): number {
+        try {
+            return (this.registersRepository
+                .getViewsByUserId(id))
+                .length;
+        } catch (error) {
+            throw error
+        }
+
     }
 }

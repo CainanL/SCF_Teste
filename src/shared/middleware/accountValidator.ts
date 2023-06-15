@@ -3,35 +3,37 @@ import jwt from "jsonwebtoken";
 import { TTokenVerify } from "../dto";
 import { AccountRepository } from "../../Modules/Account/Repository/Implementation";
 
-export  function accountValidator (request: Request, response: Response, next: NextFunction) {
-    const authorization = request.headers.authorization;
+export class Validator {
+    static account(request: Request, response: Response, next: NextFunction) {
+        const authorization = request.headers.authorization;
 
-    if (!authorization) return response.status(401).json({ error: "access denied" });
+        if (!authorization) return response.status(401).json({ error: "access denied" });
 
-    try {
-        const [, token] = authorization.split(' ');
-        if (!token) return response.status(401).json({ error: 'access denied' });
-        const {
-            id,
-            email,
-            role,
-            userId
-        } = jwt.verify(token, process.env.TOKEN_SECRET_KEY) as TTokenVerify;
-        
-        const accountRepository = new AccountRepository();
-        const accountValid =  accountRepository.getById(id);
-        
-        if (!accountValid) return response.status(401).json({ error: 'access denied' });
+        try {
+            const [, token] = authorization.split(' ');
+            if (!token) return response.status(401).json({ error: 'access denied' });
+            const {
+                id,
+                email,
+                role,
+                userId
+            } = jwt.verify(token, process.env.TOKEN_SECRET_KEY) as TTokenVerify;
 
-        request.body.requestUserData = {
-            id,
-            email,
-            role,
-            userId
+            const accountRepository = new AccountRepository();
+            const accountValid = accountRepository.getById(id);
+
+            if (!accountValid) return response.status(401).json({ error: 'access denied' });
+
+            request.body.requestUserData = {
+                id,
+                email,
+                role,
+                userId
+            }
+            next();
+        } catch (error) {
+            if (error == "TokenExpiredError: jwt expired") return response.status(401).json({ code: 'token.expired' });
+            return response.status(401).json({ error: 'access denied' });
         }
-        next();
-    } catch (error) {
-        if (error == "TokenExpiredError: jwt expired") return response.status(401).json({ code: 'token.expired' });
-        return response.status(401).json({ error: 'access denied' });
     }
 }

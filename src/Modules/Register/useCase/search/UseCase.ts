@@ -6,9 +6,14 @@ export class SearchRegistersUseCase {
 
     constructor(registersRepository: IRegisterRepository) {
         this.registersRepository = registersRepository;
-    }    
+    }
 
-     execute(filter: string): TRepository[]{
-        return  this.registersRepository.search(filter);
+    execute(filter: string): TRepository[] {
+        try {
+            return this.registersRepository.search(filter);
+        } catch (error) {
+            throw error
+        }
+        
     }
 }

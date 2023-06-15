@@ -5,7 +5,7 @@ import { CreateRegistersController } from "../Modules/Register/useCase/create/Co
 import { DeleteRegistersController } from "../Modules/Register/useCase/delete/Controller";
 import { UpdateRegistersController } from "../Modules/Register/useCase/update/Controller";
 import { GetViewsAmmountController } from "../Modules/Register/useCase/getViewsAmmount/Controller";
-import { accountValidator } from "../shared/middleware/accountValidator";
+import { Validator } from "../shared/middleware/accountValidator";
 import { PermissionRegisterValidator } from "../Modules/Register/middleware/permission";
 import { RegisterRequestSchema } from "../Modules/Register/middleware/requestSchema";
 
@@ -43,7 +43,7 @@ registerRouter.put(
     "/:id",
     RegisterRequestSchema.update,
     RegisterRequestSchema.validateRequestSchema,
-    accountValidator,
+    Validator.account,
     permissionUpdateRegisterValidator
         .hasPermission.bind(permissionUpdateRegisterValidator),
     updateRegistersController.handle
@@ -53,7 +53,7 @@ registerRouter.delete(
     "/:id",
     RegisterRequestSchema.requestId,
     RegisterRequestSchema.validateRequestSchema,
-    accountValidator,
+    Validator.account,
     permissionDeleteRegisterValidator
         .hasPermission.bind(permissionDeleteRegisterValidator),
     deleteRegistersController.handle

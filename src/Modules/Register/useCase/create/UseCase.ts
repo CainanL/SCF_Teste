@@ -9,6 +9,11 @@ export class CreateRegistersUseCase {
     }
 
      execute(data: ICreateRegisterDTO): TRepository {
-        return  this.registersRepository.create(data);
+        try {
+            return  this.registersRepository.create(data);
+        } catch (error) {
+            throw error;
+        }
+        
     }
 }
